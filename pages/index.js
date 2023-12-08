@@ -103,6 +103,9 @@ export default function Home() {
       body: JSON.stringify({ "organizationData": file })
     }).then(res => res.json()).then(data => console.log(data)).catch(err => console.error(err));
 
+    fetch('/api/organization-chart').then(res => res.json())
+      .then(data => console.log(data)).catch(err => console.log(err));
+
     // fetch('/api/me').then(res => res.json()).then(data => console.log(data)).catch(err => console.log(err))
   }, [])
   
