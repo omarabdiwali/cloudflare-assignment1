@@ -106,7 +106,7 @@ export default function Home() {
     fetch('/api/organization-chart').then(res => res.json())
       .then(data => console.log(data)).catch(err => console.log(err));
 
-    // fetch('/api/me').then(res => res.json()).then(data => console.log(data)).catch(err => console.log(err))
+    fetch('/api/me').then(res => res.json()).then(data => console.log(data)).catch(err => console.log(err))
   }, [])
   
   return (
