@@ -42,8 +42,10 @@ const formatData = (file) => {
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
-    const orgChart = process.env.ORG.get("organization");  
-    return new Response(orgChart);
+    let data = {};
+    // const orgChart = process.env.ORG.get("organization"); 
+    data["helo"] = process.env;
+    return new Response(JSON.stringify(data));
   } else {
     const body = await req.json();
     const { organizationData } = body;
