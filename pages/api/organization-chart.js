@@ -46,7 +46,7 @@ export default async function handler(req, res) {
     const myKv = process.env.ORG;
     const org = await myKv.get("organization");
     // data['a'] = myKv;
-    data['org'] = org;
+    data['org'] = JSON.parse(org);
     // const orgChart = process.env.ORG.get("organization"); 
     return new Response(JSON.stringify(data));
   } else {
