@@ -44,7 +44,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     const myKv = process.env.ORG;
     const org = await myKv.get("organization");
-    return new Response(JSON.stringify(org));
+    return new Response(org);
   } else {
     const body = await req.json();
     const { organizationData } = body;
