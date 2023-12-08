@@ -44,7 +44,8 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     let data = {};
     // const orgChart = process.env.ORG.get("organization"); 
-    data["helo"] = process.env;
+    data["a"] = process.env.org;
+    data["b"] = process.env.ORG;
     return new Response(JSON.stringify(data));
   } else {
     const body = await req.json();
