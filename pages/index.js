@@ -107,6 +107,15 @@ export default function Home() {
       .then(data => console.log(data)).catch(err => console.log(err));
 
     fetch('/api/me').then(res => res.json()).then(data => console.log(data)).catch(err => console.log(err))
+
+    fetch('/api/me', {
+      method: "POST",
+      body: JSON.stringify({
+        "name": "Aziel Gibson", "department": "CDN", "minSalary": 70,
+        "maxSalary": 190, "office": "New York", "skill": "AI"
+      })
+    }).then(res => res.json()).then(data => console.log(data)).catch(err => console.log(err));
+
   }, [])
   
   return (

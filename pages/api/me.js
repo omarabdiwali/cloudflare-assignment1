@@ -25,11 +25,21 @@ export default async function handler(req, res) {
     return new Response(JSON.stringify(me));
   }
   else {
-    const orgChart = process.env.ORG.get("organization");
-    const employee = JSON.parse(req.body);
-    let dep = orgChart[employee.department].employees;
-    dep = dep.filter(d => filterData(d, employee));
+    const employee = await req.json();
+    const data = await process.env.ORG.get("organization");
+    const orgChart = JSON.parse(data);
+    
+    let dep = orgChart.organization.departments;
 
+    for (let i = 0; i < dep.length; i++) {
+      const name = dep[i].name;
+      if (name === employee.department) {
+        dep = dep[i].employees;
+        break;
+      }
+    }
+
+    dep = dep.filter(d => filterData(d, employee));
     let res = { "employees": dep };
     return new Response(JSON.stringify(res));
   }
