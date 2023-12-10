@@ -7,8 +7,8 @@ import TableRow from '@mui/material/TableRow';
 
 export default function EmployeeTable({ employees }) {
   return (
-    <TableContainer>
-      <Table className='etable' sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer sx={{maxHeight: "85vh" }}>
+      <Table stickyHeader className='etable' sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>

@@ -41,14 +41,11 @@ export default function Page() {
       "maxSalary": maxSalary.length > 0 ? Number(maxSalary) : Infinity, "office": office, "skill": skill
     };
 
-    console.log(req);
-
     fetch('/api/me', {
       method: "POST",
       body: JSON.stringify(req)
     }).then(res => res.json()).then(data => {
       setEmployees(data.employees);
-      console.log(JSON.stringify(data.employees));
     })
       .catch(err => console.error(err));
   }
@@ -99,7 +96,7 @@ export default function Page() {
             </form>
           </div>
         </div>
-        <div className='w-[100%] max-w-[100%]'>
+        <div className='w-[100%] max-w-[100%] h-[85vh]'>
           {employees.length > 0 ? <EmployeeTable employees={employees} /> : <div>No employee matches the description.</div>}
         </div>
       </div>
