@@ -1,4 +1,5 @@
 import EmployeeTable from '@/component/EmployeeTable';
+import Head from 'next/head';
 import { useState } from 'react';
 
 export default function Page() {
@@ -52,6 +53,9 @@ export default function Page() {
 
   return (
     <>
+      <Head>
+        <title>Find Employee(s)</title>
+      </Head>
       <div className='mt-8 mx-3 flex flex-row space-x-3'>
         <a href='/' className='hover:underline'>Organization Table</a>
         <div className='text-slate-600'>/</div>
