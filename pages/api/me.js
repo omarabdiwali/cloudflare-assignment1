@@ -6,10 +6,12 @@ export const config = {
 const filterData = (a, b) => {
   let name = a.name.toLowerCase();
   let office = a.office.toLowerCase();
-  let skills = a.skills.map(s => s.toLowerCase());
+  let skills = a.skills.map(s => s.toLowerCase()).join("/");
 
   if (name.includes(b.name.toLowerCase()) && office.includes(b.office.toLowerCase()) && skills.includes(b.skill.toLowerCase())) {
-    if (a.salary <= b.maxSalary && a.salary >= b.minSalary) {
+    let minSalary = b.minSalary ? b.minSalary : -Infinity;
+    let maxSalary = b.maxSalary ? b.maxSalary : Infinity;
+    if (a.salary <= maxSalary && a.salary >= minSalary) {
       return true
     }
   }
@@ -37,8 +39,8 @@ export default async function handler(req, res) {
     let emps = [];
 
     for (let i = 0; i < dep.length; i++) {
-      const name = dep[i].name;
-      if (name.includes(employee.department)) {
+      const name = dep[i].name.toLowerCase();
+      if (name.includes(employee.department.toLowerCase())) {
         emps.push(...dep[i].employees);
       }
     }

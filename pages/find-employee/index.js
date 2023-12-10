@@ -4,7 +4,7 @@ import { useState } from 'react';
 export default function Page() {
   const [name, setName] = useState("");
   const [department, setDepartment] = useState("");
-  const [minSalary, setMinSalary] = useState('');
+  const [minSalary, setMinSalary] = useState("");
   const [maxSalary, setMaxSalary] = useState("");
   const [office, setOffice] = useState("");
   const [skill, setSkill] = useState("");
@@ -37,9 +37,11 @@ export default function Page() {
     }
 
     let req = {
-      name, department, minSalary: minSalary.length > 0 ? Number(minSalary) : -Infinity,
-      maxSalary: maxSalary.length > 0 ? Number(maxSalary) : Infinity, office, skill
+      "name": name, "department": department, "minSalary": minSalary.length > 0 ? Number(minSalary) : -Infinity,
+      "maxSalary": maxSalary.length > 0 ? Number(maxSalary) : Infinity, "office": office, "skill": skill
     };
+
+    console.log(req);
 
     fetch('/api/me', {
       method: "POST",
@@ -58,8 +60,8 @@ export default function Page() {
         <div className='text-slate-600'>/</div>
         <a href='/format-csv' className='hover:underline'>Format CSV String</a>
       </div>
-      <div className='mt-8 mx-3 flex flex-row space-x-5'>
-        <div className="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
+      <div className='mt-8 mx-3 flex flex-row space-x-5 bg-gray-800'>
+        <div className="w-full md:mt-0 sm:max-w-md xl:p-0 bg-gray-800">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl text-white">
                 Find Employee(s)
@@ -73,9 +75,15 @@ export default function Page() {
                 <label className="block mb-2 text-sm font-medium text-white">Department</label>
                 <input value={department} onChange={changeData} id="dep" placeholder="Department" className="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" />
               </div>
-              <div>
-                <label className="block mb-2 text-sm font-medium text-white">Office</label>
-                <input value={office} onChange={changeData} id="office" placeholder="Office" className="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" />
+              <div className='flex flex-row space-x-3'>
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-white">Office</label>
+                  <input value={office} onChange={changeData} id="office" placeholder="Office" className="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" />
+                </div>
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-white">Skill</label>
+                  <input value={skill} onChange={changeData} id="skill" placeholder="Skill" className="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" />
+                </div>
               </div>
               <div className='flex flex-row space-x-3'>
                 <div>
@@ -91,8 +99,8 @@ export default function Page() {
             </form>
           </div>
         </div>
-        <div>
-          {employees.length > 0 ? <EmployeeTable employees={employees} /> : <div>No Employee(s) match the description.</div>}
+        <div className='w-[100%] max-w-[100%]'>
+          {employees.length > 0 ? <EmployeeTable employees={employees} /> : <div>No employee matches the description.</div>}
         </div>
       </div>
     </>

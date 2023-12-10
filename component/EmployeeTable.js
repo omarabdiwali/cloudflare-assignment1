@@ -1,32 +1,42 @@
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+
 export default function EmployeeTable({ employees }) {
   return (
-    <table className="border-collapse table-auto w-full">
-      <thead>
-        <tr>
-          <th className="border-b border-slate-600 font-medium p-3 pt-0 pb-3 text-slate-200 text-left">Name</th>
-          <th className="border-b border-slate-600 font-medium p-3 pt-0 pb-3 text-slate-200 text-left">Department</th>
-          <th className="border-b border-slate-600 font-medium p-3 pt-0 pb-3 text-slate-200 text-left">Office</th>
-          <th className="border-b border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-200 text-left">Salary</th>
-          <th className="border-b border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-200 text-left">Role</th>
-          <th className="border-b border-slate-600 font-medium p-3 pr-5 pt-0 pb-3 text-slate-200 text-left">Skills</th>
-        </tr>
-      </thead>
-      <tbody className="bg-gray-800">
-        {employees.slice.map((emp, i) => {
-          let skills = emp.skills.join(' / ');
-
-          return (
-            <tr key={i}>
-              <td className="border-b text-xs border-slate-700 p-3 text-slate-400">{emp.name}</td>
-              <td className="border-b text-xs border-slate-700 p-3 text-slate-400">{emp.department}</td>
-              <td className="border-b text-xs border-slate-700 p-3 text-slate-400">{emp.office}</td>
-              <td className="border-b text-xs border-slate-700 p-3 text-slate-400">{emp.salary}</td>
-              <td className="border-b text-xs border-slate-700 p-3 text-slate-400">{emp.isManager ? 'Manager' : 'Employee'}</td>
-              <td className="border-b text-xs border-slate-700 p-3 text-slate-400">{skills}</td>
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
-  )
+    <TableContainer>
+      <Table className='etable' sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell align="left">Role</TableCell>
+            <TableCell align="left">Department</TableCell>
+            <TableCell align="left">Office</TableCell>
+            <TableCell align="left">Skills</TableCell>
+            <TableCell align="left">Salary</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {employees.map((emp) => (
+            <TableRow
+              key={emp.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {emp.name}
+              </TableCell>
+              <TableCell align="left">{emp.isManager ? "Manager" : "Employee"}</TableCell>
+              <TableCell align="left">{emp.department}</TableCell>
+              <TableCell align="left">{emp.office}</TableCell>
+              <TableCell align="left">{emp.skills.join(' / ')}</TableCell>
+              <TableCell align="left">{emp.salary}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }

@@ -49,6 +49,17 @@ export default async function handler(req, res) {
     const body = await req.json();
     const { organizationData } = body;
     let formattedData = formatData(organizationData);
-    return new Response(JSON.stringify(formattedData));
+    
+    let emps = [];
+    let deps = formattedData.organization.departments;
+
+    for (let i = 0; i < deps.length; i++) {
+      const dep = deps[i];
+      emps.push(...dep.employees);
+    }
+
+    let res = { emps };
+
+    return new Response(JSON.stringify(res));
   }
 }

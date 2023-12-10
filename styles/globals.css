@@ -11,6 +11,11 @@
   color: rgb(148 163 184);
 }
 
+.etable :not(.a *) {
+  background-color: rgb(31 41 55);
+  color: rgb(148 163 184);
+}
+
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: 0, 0, 0;
