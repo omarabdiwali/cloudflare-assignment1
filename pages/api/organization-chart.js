@@ -12,7 +12,7 @@ const formatData = (file) => {
     let dp = line[1];
     
     let curEmp = {
-      "name": line[0].trim(),
+      "name": line[0],
       "department": line[1],
       "salary": parseInt(line[2]),
       "office": line[3],
@@ -28,7 +28,7 @@ const formatData = (file) => {
     }
     
     if (line[4] == "TRUE") {
-      allDepartments[dp]["managerName"] = line[0].trim();
+      allDepartments[dp]["managerName"] = line[0];
     }
     
     allDepartments[dp]["employees"].push(curEmp)

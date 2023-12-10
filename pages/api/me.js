@@ -4,7 +4,11 @@ export const config = {
 }
 
 const filterData = (a, b) => {
-  if (a.name == b.name && a.office == b.office && a.skills.includes(b.skill)) {
+  let name = a.name.toLowerCase();
+  let office = a.office.toLowerCase();
+  let skills = a.skills.map(s => s.toLowerCase());
+
+  if (name.includes(b.name.toLowerCase()) && office.includes(b.office.toLowerCase()) && skills.includes(b.skill.toLowerCase())) {
     if (a.salary <= b.maxSalary && a.salary >= b.minSalary) {
       return true
     }
@@ -18,7 +22,7 @@ export default async function handler(req, res) {
       "name": "Omar",
       "homepage": "https://omarabdiwali.vercel.app",
       "githubURL": "https://github.com/omarabdiwali",
-      "interestingFact": "I am from Canada.",
+      "interestingFact": "I have played soccer all my life, and won major tournaments in my city.",
       "skills": ["React", "JavaScript", "Python", "MongoDB"]
     }
     
@@ -30,17 +34,17 @@ export default async function handler(req, res) {
     const orgChart = JSON.parse(data);
     
     let dep = orgChart.organization.departments;
+    let emps = [];
 
     for (let i = 0; i < dep.length; i++) {
       const name = dep[i].name;
-      if (name === employee.department) {
-        dep = dep[i].employees;
-        break;
+      if (name.includes(employee.department)) {
+        emps.push(...dep[i].employees);
       }
     }
 
-    dep = dep.filter(d => filterData(d, employee));
-    let res = { "employees": dep };
+    emps = emps.filter(d => filterData(d, employee));
+    let res = { "employees": emps };
     return new Response(JSON.stringify(res));
   }
 }
